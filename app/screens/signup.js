@@ -2,14 +2,14 @@ import { FontAwesome, Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
 import {
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
+    StyleSheet,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View,
 } from "react-native";
 
-export default function LoginEmail() {
+export default function SignUp() {
   const router = useRouter();
   return (
     <LinearGradient colors={["#050816", "#0A1023"]} style={styles.container}>
@@ -29,12 +29,11 @@ export default function LoginEmail() {
       </View>
 
       {/* Title */}
-      <Text style={styles.appTitle}>Lammah App</Text>
+      <Text style={styles.appTitle}>Create Account</Text>
 
       {/* Subtitle */}
       <Text style={styles.appSubtitle}>
-        Lammah is your all-in-one solution for a smarter, more{"\n"}
-        connected digital experience.
+        Join the community to reconnect and organize
       </Text>
 
       {/* Card */}
@@ -45,32 +44,40 @@ export default function LoginEmail() {
         </Text>
 
         {/* Switch */}
-        <View style={styles.switchRow}>
-          {/* EMAIL ACTIVE */}
-          <TouchableOpacity style={[styles.switchBtn, styles.switchActive]}>
-            <Ionicons name="mail-outline" size={15} color="#000" />
-            <Text style={styles.switchActiveText}> Email</Text>
-          </TouchableOpacity>
-
-          {/* GO TO PHONE */}
-          <TouchableOpacity
-            style={styles.switchBtn}
-            onPress={() => router.push("/screens/logwithPhone")}
-          >
-            <Ionicons name="call-outline" size={15} color="#fff" />
-            <Text style={styles.switchText}> Phone</Text>
-          </TouchableOpacity>
-        </View>
 
         {/* Email */}
-        <Text style={styles.label}>Email</Text>
+        <Text style={styles.label}>Full Name</Text>
         <TextInput
-          placeholder="Enter your email"
+          placeholder="Enter your full name"
           placeholderTextColor="#555"
           style={styles.input}
         />
 
+        <Text style={styles.label}>Phone Number</Text>
+        <View style={styles.phoneContainer}>
+          <View style={styles.flagBox}>
+            <Text style={styles.flag}>🇺🇸</Text>
+            <Text style={styles.code}>+1</Text>
+          </View>
+
+          <TextInput
+            placeholder="Enter your Phone Number"
+            placeholderTextColor="#555"
+            style={styles.phoneInput}
+          />
+        </View>
+
         {/* Password */}
+        <Text style={styles.label}>Email Adress</Text>
+        <View style={styles.passwordWrap}>
+          <TextInput
+            placeholder="Enter your email"
+            placeholderTextColor="#555"
+            secureTextEntry
+            style={styles.passwordInput}
+          />
+        </View>
+
         <Text style={styles.label}>Password</Text>
         <View style={styles.passwordWrap}>
           <TextInput
@@ -82,14 +89,9 @@ export default function LoginEmail() {
           <Ionicons name="eye-off-outline" size={16} color="#777" />
         </View>
 
-        {/* Forgot */}
-        <TouchableOpacity>
-          <Text style={styles.forgot}>Forgot Password?</Text>
-        </TouchableOpacity>
-
         {/* Login */}
         <TouchableOpacity style={styles.loginBtn}>
-          <Text style={styles.loginText}>Login</Text>
+          <Text style={styles.loginText}>Signup</Text>
         </TouchableOpacity>
 
         {/* OR */}
@@ -113,7 +115,7 @@ export default function LoginEmail() {
 
         {/* Signup */}
         <Text style={styles.signupText}>
-          Don't have an account? <Text style={styles.signupLink}>Signup</Text>
+          Don't have an account? <Text style={styles.signupLink}>Login</Text>
         </Text>
       </View>
     </LinearGradient>
@@ -264,6 +266,38 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     marginTop: 12,
     marginBottom: 5,
+  },
+  phoneContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "rgba(40,40,55,0.95)",
+    borderRadius: 7,
+    paddingHorizontal: "4%",
+  },
+
+  flagBox: {
+    flexDirection: "row",
+    alignItems: "center",
+    borderRightWidth: 1,
+    borderRightColor: "#555",
+    paddingRight: "3%",
+    marginRight: "3%",
+  },
+
+  flag: {
+    fontSize: 20,
+    marginRight: 5,
+  },
+
+  code: {
+    color: "#fff",
+    fontSize: 14,
+  },
+
+  phoneInput: {
+    flex: 1,
+    color: "#fff",
+    paddingVertical: "3%",
   },
 
   input: {

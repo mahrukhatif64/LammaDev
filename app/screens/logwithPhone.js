@@ -1,16 +1,18 @@
 import { FontAwesome, Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
+
 import {
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
+    StyleSheet,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View,
 } from "react-native";
 
-export default function LoginEmail() {
+export default function LoginPhone() {
   const router = useRouter();
+
   return (
     <LinearGradient colors={["#050816", "#0A1023"]} style={styles.container}>
       {/* Toggle top-right */}
@@ -46,29 +48,36 @@ export default function LoginEmail() {
 
         {/* Switch */}
         <View style={styles.switchRow}>
-          {/* EMAIL ACTIVE */}
-          <TouchableOpacity style={[styles.switchBtn, styles.switchActive]}>
-            <Ionicons name="mail-outline" size={15} color="#000" />
-            <Text style={styles.switchActiveText}> Email</Text>
-          </TouchableOpacity>
-
-          {/* GO TO PHONE */}
+          {/* GO BACK TO EMAIL */}
           <TouchableOpacity
             style={styles.switchBtn}
-            onPress={() => router.push("/screens/logwithPhone")}
+            onPress={() => router.push("/screens/logwithEmail")}
           >
-            <Ionicons name="call-outline" size={15} color="#fff" />
-            <Text style={styles.switchText}> Phone</Text>
+            <Ionicons name="mail-outline" size={15} color="#fff" />
+            <Text style={styles.switchText}> Email</Text>
+          </TouchableOpacity>
+
+          {/* PHONE ACTIVE */}
+          <TouchableOpacity style={[styles.switchBtn, styles.switchActive]}>
+            <Ionicons name="call-outline" size={15} color="#000" />
+            <Text style={styles.switchActiveText}> Phone</Text>
           </TouchableOpacity>
         </View>
 
         {/* Email */}
-        <Text style={styles.label}>Email</Text>
-        <TextInput
-          placeholder="Enter your email"
-          placeholderTextColor="#555"
-          style={styles.input}
-        />
+        <Text style={styles.label}>Phone Number</Text>
+        <View style={styles.phoneContainer}>
+          <View style={styles.flagBox}>
+            <Text style={styles.flag}>🇺🇸</Text>
+            <Text style={styles.code}>+1</Text>
+          </View>
+
+          <TextInput
+            placeholder="Enter your Phone Number"
+            placeholderTextColor="#555"
+            style={styles.phoneInput}
+          />
+        </View>
 
         {/* Password */}
         <Text style={styles.label}>Password</Text>
@@ -113,7 +122,13 @@ export default function LoginEmail() {
 
         {/* Signup */}
         <Text style={styles.signupText}>
-          Don't have an account? <Text style={styles.signupLink}>Signup</Text>
+          Don't have an account?{" "}
+          <Text
+            style={styles.signupLink}
+            onPress={() => router.push("/screens/signup")}
+          >
+            Signup
+          </Text>
         </Text>
       </View>
     </LinearGradient>
@@ -265,29 +280,59 @@ const styles = StyleSheet.create({
     marginTop: 12,
     marginBottom: 5,
   },
+  phoneContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "rgba(40,40,55,0.95)",
+    borderRadius: 7,
+    paddingHorizontal: "4%",
+  },
+
+  flagBox: {
+    flexDirection: "row",
+    alignItems: "center",
+    borderRightWidth: 1,
+    borderRightColor: "#555",
+    paddingRight: "3%",
+    marginRight: "3%",
+  },
+
+  flag: {
+    fontSize: 20,
+    marginRight: 5,
+  },
+
+  code: {
+    color: "#fff",
+    fontSize: 14,
+  },
+
+  phoneInput: {
+    flex: 1,
+    color: "#fff",
+    paddingVertical: "3%",
+  },
 
   input: {
     width: "100%",
     height: 42,
-    borderRadius: 7,
+    borderRadius: 5,
     backgroundColor: "rgba(40,40,55,0.95)",
     paddingHorizontal: 12,
     color: "#fff",
     fontSize: 13,
     borderWidth: 0.5,
-    borderColor: "rgba(255,255,255,0.08)",
   },
 
   passwordWrap: {
     width: "100%",
-    height: 42,
+    height: 38,
     borderRadius: 7,
     backgroundColor: "rgba(40,40,55,0.95)",
     flexDirection: "row",
     alignItems: "center",
     paddingHorizontal: 12,
     borderWidth: 0.5,
-    borderColor: "rgba(255,255,255,0.08)",
   },
 
   passwordInput: {
