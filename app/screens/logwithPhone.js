@@ -51,7 +51,7 @@ export default function LoginPhone() {
           {/* GO BACK TO EMAIL */}
           <TouchableOpacity
             style={styles.switchBtn}
-            onPress={() => router.push("/screens/logwithEmail")}
+            onPress={() => router.replace("/screens/logwithEmail")}
           >
             <Ionicons name="mail-outline" size={15} color="#fff" />
             <Text style={styles.switchText}> Email</Text>

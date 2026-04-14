@@ -1,4 +1,5 @@
 import { FontAwesome5, Ionicons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 import { useState } from "react";
 import {
     Pressable,
@@ -8,13 +9,14 @@ import {
     View,
 } from "react-native";
 
-export default function ChooseRole({ navigation }) {
+export default function ChooseRole() {
+  const router = useRouter();
   const [selected, setSelected] = useState(null);
 
   return (
     <View style={styles.container}>
       {/* Back Button */}
-      <TouchableOpacity style={styles.backBtn}>
+      <TouchableOpacity style={styles.backBtn} onPress={() => router.back()}>
         <Ionicons name="chevron-back" size={24} color="#00F5FF" />
       </TouchableOpacity>
 
@@ -53,6 +55,7 @@ export default function ChooseRole({ navigation }) {
 
       {/* Card */}
       <View style={styles.card}>
+
         <Text style={styles.cardTitle}>Choose Your Role</Text>
         <Text style={styles.cardSubtitle}>
           Select the option that best describe how you’ll use Lamma App
@@ -96,6 +99,14 @@ export default function ChooseRole({ navigation }) {
           </View>
         </Pressable>
       </View>
+
+      <TouchableOpacity
+        style={[styles.continueBtn, !selected && styles.continueBtnDisabled]}
+        onPress={() => selected && router.replace("/(tabs)")}
+        activeOpacity={selected ? 0.8 : 1}
+      >
+        <Text style={styles.continueBtnText}>Continue</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -256,5 +267,30 @@ const styles = StyleSheet.create({
     color: "#9CA3AF",
     fontSize: 11,
     width: 220,
+  },
+
+  continueBtn: {
+    marginTop: 24,
+    height: 48,
+    backgroundColor: "#00F5FF",
+    borderRadius: 10,
+    justifyContent: "center",
+    alignItems: "center",
+    shadowColor: "#00F5FF",
+    shadowOpacity: 0.4,
+    shadowRadius: 10,
+    elevation: 6,
+  },
+
+  continueBtnDisabled: {
+    backgroundColor: "#1C3A3B",
+    shadowOpacity: 0,
+    elevation: 0,
+  },
+
+  continueBtnText: {
+    color: "#000",
+    fontSize: 15,
+    fontWeight: "700",
   },
 });

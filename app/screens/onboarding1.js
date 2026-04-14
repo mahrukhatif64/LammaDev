@@ -40,7 +40,7 @@ export default function Onboarding1() {
 
             <TouchableOpacity
               style={styles.button}
-              onPress={() => router.push("/screens/onboarding2")}
+              onPress={() => router.replace("/screens/onboarding2")}
             >
               <Image
                 source={require("../../assets/images/arrow.png")}

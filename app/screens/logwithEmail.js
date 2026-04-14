@@ -55,7 +55,7 @@ export default function LoginEmail() {
           {/* GO TO PHONE */}
           <TouchableOpacity
             style={styles.switchBtn}
-            onPress={() => router.push("/screens/logwithPhone")}
+            onPress={() => router.replace("/screens/logwithPhone")}
           >
             <Ionicons name="call-outline" size={15} color="#fff" />
             <Text style={styles.switchText}> Phone</Text>
@@ -113,7 +113,8 @@ export default function LoginEmail() {
 
         {/* Signup */}
         <Text style={styles.signupText}>
-          Don't have an account? <Text style={styles.signupLink}>Signup</Text>
+          Don't have an account?{" "}
+          <Text style={styles.signupLink} onPress={() => router.push("/screens/signup")}>Signup</Text>
         </Text>
       </View>
     </LinearGradient>

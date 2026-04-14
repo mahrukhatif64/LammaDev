@@ -90,7 +90,7 @@ export default function SignUp() {
         </View>
 
         {/* Login */}
-        <TouchableOpacity style={styles.loginBtn}>
+        <TouchableOpacity style={styles.loginBtn} onPress={() => router.push("/screens/chooseRoll")}>
           <Text style={styles.loginText}>Signup</Text>
         </TouchableOpacity>
 

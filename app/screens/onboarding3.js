@@ -1,3 +1,4 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
 import {
@@ -34,7 +35,11 @@ export default function Onboarding3() {
           <View style={styles.bottomRow}>
             <TouchableOpacity
               style={styles.getStartedButton}
-              onPress={() => router.push("/screens/logwithEmail")}
+              onPress={async () => {
+                // Mark onboarding as complete so it's never shown again
+                await AsyncStorage.setItem("hasSeenOnboarding", "true");
+                router.replace("/screens/logwithEmail");
+              }}
             >
               <Text style={styles.getStartedText}>Get Started</Text>
             </TouchableOpacity>
