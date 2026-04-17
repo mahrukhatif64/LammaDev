@@ -1,12 +1,15 @@
 import { FontAwesome, Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
+import LogoBox from "../../components/logoBox";
+
 import {
-    StyleSheet,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    View,
+  Image,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
 } from "react-native";
 
 export default function SignUp() {
@@ -23,10 +26,7 @@ export default function SignUp() {
         </TouchableOpacity>
       </View>
 
-      {/* Logo centered */}
-      <View style={styles.logoBox}>
-        <Ionicons name="person-outline" size={18} color="#00F5FF" />
-      </View>
+      <LogoBox />
 
       {/* Title */}
       <Text style={styles.appTitle}>Create Account</Text>
@@ -38,46 +38,53 @@ export default function SignUp() {
 
       {/* Card */}
       <View style={styles.card}>
-        <Text style={styles.welcome}>Welcome Back</Text>
-        <Text style={styles.signInText}>
-          Sign in to your account to continue
-        </Text>
+        <View style={styles.profilePicContainer}>
+          <TouchableOpacity style={styles.profilePicCircle}>
+            <Image
+              source={require("../../assets/images/profile.png")}
+              style={{ width: 28, height: 28 }}
+            />
+          </TouchableOpacity>
+          <Text style={styles.profilePicText}>
+            Upload profile picture{"\n"}(optional)
+          </Text>
+        </View>
 
-        {/* Switch */}
-
-        {/* Email */}
+        {/* Full Name */}
         <Text style={styles.label}>Full Name</Text>
         <TextInput
-          placeholder="Enter your full name"
+          placeholder="Enter full name"
           placeholderTextColor="#555"
           style={styles.input}
         />
 
+        {/* Phone Number */}
         <Text style={styles.label}>Phone Number</Text>
         <View style={styles.phoneContainer}>
           <View style={styles.flagBox}>
             <Text style={styles.flag}>🇺🇸</Text>
             <Text style={styles.code}>+1</Text>
           </View>
-
           <TextInput
-            placeholder="Enter your Phone Number"
+            placeholder="Enter phone number"
             placeholderTextColor="#555"
             style={styles.phoneInput}
+            keyboardType="phone-pad"
           />
         </View>
 
-        {/* Password */}
-        <Text style={styles.label}>Email Adress</Text>
+        <Text style={styles.label}>Email Address</Text>
         <View style={styles.passwordWrap}>
           <TextInput
             placeholder="Enter your email"
             placeholderTextColor="#555"
-            secureTextEntry
+            keyboardType="email-address"
+            autoCapitalize="none"
             style={styles.passwordInput}
           />
         </View>
 
+        {/* Password */}
         <Text style={styles.label}>Password</Text>
         <View style={styles.passwordWrap}>
           <TextInput
@@ -89,8 +96,11 @@ export default function SignUp() {
           <Ionicons name="eye-off-outline" size={16} color="#777" />
         </View>
 
-        {/* Login */}
-        <TouchableOpacity style={styles.loginBtn} onPress={() => router.push("/screens/chooseRoll")}>
+        {/* Signup Button */}
+        <TouchableOpacity
+          style={styles.loginBtn}
+          onPress={() => router.push("/screens/chooseRoll")}
+        >
           <Text style={styles.loginText}>Signup</Text>
         </TouchableOpacity>
 
@@ -113,9 +123,15 @@ export default function SignUp() {
           </TouchableOpacity>
         </View>
 
-        {/* Signup */}
+        {/* ✅ FIX 3: Text "Already have an account? Login" */}
         <Text style={styles.signupText}>
-          Don't have an account? <Text style={styles.signupLink}>Login</Text>
+          Already have an account?{" "}
+          <Text
+            style={styles.signupLink}
+            onPress={() => router.push("/screens/login")}
+          >
+            Login
+          </Text>
         </Text>
       </View>
     </LinearGradient>
@@ -126,140 +142,146 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: "1%",
-    justifyContent: "center", // ✅ centers everything vertically
+    justifyContent: "center",
   },
 
   langToggle: {
     flexDirection: "row",
     alignSelf: "flex-end",
-    borderWidth: 1.5,
+    borderWidth: 0.5, // ✅ Figma: border 0.5px
     borderColor: "#00FFFF",
     borderRadius: 30,
     overflow: "hidden",
-    marginBottom: 12,
+    position: "absolute",
+    top: 20,
+    right: 20,
+    marginTop: 15,
+    width: 140, // ✅ Figma: width 140
+    height: 45, // ✅ Figma: height 45
   },
 
   langBtn: {
-    paddingHorizontal: 18,
-    paddingVertical: 8,
+    width: 70, // ✅ Figma: width 70
+    height: 45, // ✅ Figma: height 45
+    justifyContent: "center",
+    alignItems: "center",
     backgroundColor: "#111",
   },
 
   langActive: {
     backgroundColor: "#00FFFF",
+    borderTopLeftRadius: 30, // ✅ Figma: border-top-left-radius
+    borderBottomLeftRadius: 30, // ✅ Figma: border-bottom-left-radius
   },
 
   langText: {
-    color: "#fff",
-    fontSize: 12,
-    fontWeight: "600",
+    color: "#FFFFFF", // ✅ Figma: background #FFFFFF
+    fontSize: 14, // ✅ Figma: font-size 14px
+    fontWeight: "500", // ✅ Figma: font-weight 500
+    fontFamily: "Poppins", // ✅ Figma: font-family Poppins
+    lineHeight: 14, // ✅ Figma: line-height 100%
+    opacity: 1, // ✅ Figma: opacity 1
   },
 
   langActiveText: {
     color: "#000",
     fontWeight: "700",
-    fontSize: 12,
+    fontSize: 14, // ✅ Figma: font-size 14px
+    fontFamily: "Poppins", // ✅ Figma: font-family Poppins
   },
-
-  logoBox: {
-    width: 38,
-    height: 38,
-    alignSelf: "center",
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 7,
-    backgroundColor: "#1C2A2B",
-    borderWidth: 1,
-    borderColor: "#2A3A3B",
-    marginBottom: 20,
-  },
+  // logoBox: {
+  //   width: 38,
+  //   height: 38,
+  //   alignSelf: "center",
+  //   justifyContent: "center",
+  //   alignItems: "center",
+  //   borderRadius: 7,
+  //   backgroundColor: "#1C2A2B",
+  //   borderWidth: 1,
+  //   borderColor: "#2A3A3B",
+  //   marginTop: 15,
+  // },
 
   appTitle: {
-    color: "#00FFFF",
-    fontSize: 22,
-    fontWeight: "700",
+    color: "#00FFFF", // ✅ Figma: background #00FFFF
+    fontSize: 22, // ✅ Figma: font-size 22px
+    fontWeight: "600", // ✅ Figma: font-weight 600 SemiBold
+    fontFamily: "Poppins", // ✅ Figma: font-family Poppins
     textAlign: "center",
-    lineHeight: 28,
+    lineHeight: 22, // ✅ Figma: line-height 100%
+    width: 176, // ✅ Figma: width 176
+    alignSelf: "center",
+    marginTop: 150,
   },
 
   appSubtitle: {
-    color: "#fff",
-    textAlign: "center",
-    fontSize: 13,
-    fontWeight: "400",
-    marginTop: 6,
-    lineHeight: 20,
+    color: "#FFFFFF", // ✅ Figma: background #FFFFFF
+    textAlign: "center", // ✅ Figma: text-align center
+    fontSize: 14, // ✅ Figma: font-size 14px
+    fontWeight: "400", // ✅ Figma: font-weight 400 Regular
+    fontFamily: "Poppins", // ✅ Figma: font-family Poppins
+    lineHeight: 14, // ✅ Figma: line-height 100%
+    width: 329, // ✅ Figma: width 329
+    alignSelf: "center",
+    marginTop: 15,
   },
 
   card: {
-    width: "100%",
+    width: "100%", // ✅ Figma: width 400 (full width)
     marginTop: 14,
     borderWidth: 1,
     borderColor: "#00FFFF",
-    borderRadius: 12,
+    borderRadius: 10,
     paddingHorizontal: "5%",
-    paddingTop: "3%",
+    paddingTop: "4%",
     paddingBottom: "4%",
     backgroundColor: "rgba(10,16,35,0.95)",
-    shadowColor: "#00FFFF",
-    shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.35,
-    shadowRadius: 10,
+    shadowColor: "#000000", // ✅ Figma: box-shadow #00000040
+    shadowOffset: { width: 0, height: 4 }, // ✅ Figma: 0px 4px
+    shadowOpacity: 0.25, // ✅ Figma: opacity 40 = 0.25
+    shadowRadius: 4, // ✅ Figma: blur 4px
     elevation: 6,
   },
 
-  welcome: {
-    color: "#00FFFF",
-    fontSize: 20,
-    fontWeight: "700",
-    textAlign: "center",
-    lineHeight: 26,
+  // ✅ Profile Picture styles
+  profilePicContainer: {
+    alignItems: "center",
+    marginTop: -30,
+    width: 134, // ✅ Figma: width 134
+    height: 124, // ✅ Figma: height 124
+    alignSelf: "center",
+    justifyContent: "center",
+    marginTop: 20,
+    marginTop: 80,
   },
 
-  signInText: {
-    color: "#858585",
-    textAlign: "center",
-    fontSize: 13,
-    fontWeight: "400",
-    marginTop: 5,
-    marginBottom: 2,
-    lineHeight: 18,
-  },
-
-  switchRow: {
-    flexDirection: "row",
-    width: "100%",
-    height: 42,
-    marginTop: 12,
-    marginBottom: 4,
-    borderRadius: 8,
-    overflow: "hidden",
-  },
-
-  switchBtn: {
-    flex: 1,
-    backgroundColor: "#2B2F3A",
-    flexDirection: "row",
+  profilePicCircle: {
+    width: 80, // ✅ Figma: width 80
+    height: 80, // ✅ Figma: height 80
+    borderRadius: 40,
+    borderWidth: 1, // ✅ Figma: border-width 1px
+    borderColor: "#00FFFF", // ✅ Figma: border #00FFFF
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "rgba(0,245,255,0.05)",
   },
 
-  switchActive: {
-    backgroundColor: "#00F5FF",
+  profilePicIcon: {
+    width: 25, // ✅ Figma: width 25
+    height: 25, // ✅ Figma: height 25
   },
 
-  switchText: {
-    color: "#ffffff",
-    fontSize: 13,
-    fontWeight: "500",
+  profilePicText: {
+    color: "#858585", // ✅ Figma: background #858585
+    fontSize: 12, // ✅ Figma: font-size 12px
+    fontWeight: "400", // ✅ Figma: font-weight 400 Regular
+    fontFamily: "Poppins", // ✅ Figma: font-family Poppins
+    textAlign: "center",
+    marginTop: 8,
+    lineHeight: 12,
+    width: 134,
+    height: 36,
   },
-
-  switchActiveText: {
-    color: "#000",
-    fontWeight: "700",
-    fontSize: 13,
-  },
-
   label: {
     color: "#FFFFFF",
     fontSize: 13,
@@ -267,12 +289,15 @@ const styles = StyleSheet.create({
     marginTop: 12,
     marginBottom: 5,
   },
+
   phoneContainer: {
     flexDirection: "row",
     alignItems: "center",
     backgroundColor: "rgba(40,40,55,0.95)",
     borderRadius: 7,
     paddingHorizontal: "4%",
+    borderWidth: 0.5,
+    borderColor: "rgba(255,255,255,0.08)",
   },
 
   flagBox: {
@@ -328,15 +353,6 @@ const styles = StyleSheet.create({
     flex: 1,
     color: "#fff",
     fontSize: 13,
-  },
-
-  forgot: {
-    color: "#00F5FF",
-    fontSize: 13,
-    fontWeight: "500",
-    alignSelf: "flex-end",
-    marginTop: 8,
-    textDecorationLine: "underline",
   },
 
   loginBtn: {

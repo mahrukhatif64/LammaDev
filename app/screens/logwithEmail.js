@@ -114,7 +114,12 @@ export default function LoginEmail() {
         {/* Signup */}
         <Text style={styles.signupText}>
           Don't have an account?{" "}
-          <Text style={styles.signupLink} onPress={() => router.push("/screens/signup")}>Signup</Text>
+          <Text
+            style={styles.signupLink}
+            onPress={() => router.push("/screens/signup")}
+          >
+            Signup
+          </Text>
         </Text>
       </View>
     </LinearGradient>
@@ -136,6 +141,9 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     overflow: "hidden",
     marginBottom: 12,
+    position: "absolute",
+    top: 20,
+    right: 20,
   },
 
   langBtn: {

@@ -27,9 +27,8 @@ export default function ChooseRole() {
 
       {/* Title */}
       <Text style={styles.title}>Complete Your Profile</Text>
-
       <Text style={styles.subtitle}>
-        Welcome Johan! Let’s finish setting up your account
+        Welcome Johan! Let's finish setting up your account
       </Text>
 
       {/* Stepper */}
@@ -37,28 +36,34 @@ export default function ChooseRole() {
         <View style={styles.stepActive}>
           <Text style={styles.stepTextActive}>1</Text>
         </View>
-        <View style={styles.stepLine} />
+        <View style={styles.stepGap} />
         <View style={styles.step}>
           <Text style={styles.stepText}>2</Text>
         </View>
-        <View style={styles.stepLine} />
+        <View style={styles.stepGap} />
         <View style={styles.step}>
           <Text style={styles.stepText}>3</Text>
         </View>
       </View>
 
+      {/* Step Labels */}
       <View style={styles.stepLabels}>
         <Text style={styles.labelActive}>Choose Role</Text>
-        <Text style={styles.label}>Complete Profile</Text>
-        <Text style={styles.label}>Finish</Text>
+        <Text style={styles.labelWhite}>Complete Profile</Text>
+        <Text style={styles.labelWhite}>Finish</Text>
+      </View>
+
+      {/* Underline: cyan for step 1, white for rest */}
+      <View style={styles.underlineContainer}>
+        <View style={styles.underlineCyan} />
+        <View style={styles.underlineWhite} />
       </View>
 
       {/* Card */}
       <View style={styles.card}>
-
         <Text style={styles.cardTitle}>Choose Your Role</Text>
         <Text style={styles.cardSubtitle}>
-          Select the option that best describe how you’ll use Lamma App
+          Select the option that best describe how you'll use Lamma App
         </Text>
 
         {/* Alumni */}
@@ -67,7 +72,10 @@ export default function ChooseRole() {
             styles.option,
             selected === "alumni" && styles.selectedOption,
           ]}
-          onPress={() => setSelected("alumni")}
+          onPress={() => {
+            setSelected("alumni");
+            router.push("/screens/completeProfile");
+          }}
         >
           <View style={[styles.iconWrap, { backgroundColor: "#3B82F6" }]}>
             <FontAwesome5 name="graduation-cap" size={18} color="#fff" />
@@ -86,7 +94,10 @@ export default function ChooseRole() {
             styles.option,
             selected === "vendor" && styles.selectedOption,
           ]}
-          onPress={() => setSelected("vendor")}
+          onPress={() => {
+            setSelected("vendor");
+            router.push("screens/vendorRole");
+          }}
         >
           <View style={[styles.iconWrap, { backgroundColor: "#22C55E" }]}>
             <FontAwesome5 name="tools" size={18} color="#fff" />
@@ -99,14 +110,6 @@ export default function ChooseRole() {
           </View>
         </Pressable>
       </View>
-
-      <TouchableOpacity
-        style={[styles.continueBtn, !selected && styles.continueBtnDisabled]}
-        onPress={() => selected && router.replace("/(tabs)")}
-        activeOpacity={selected ? 0.8 : 1}
-      >
-        <Text style={styles.continueBtnText}>Continue</Text>
-      </TouchableOpacity>
     </View>
   );
 }
@@ -153,11 +156,17 @@ const styles = StyleSheet.create({
     fontSize: 13,
   },
 
+  // ✅ NEW STEPPER STYLES
   stepper: {
     flexDirection: "row",
     alignItems: "center",
     marginTop: 25,
-    justifyContent: "center",
+    justifyContent: "space-between",
+    paddingHorizontal: 10,
+  },
+
+  stepGap: {
+    flex: 1, // gap only, no line
   },
 
   step: {
@@ -190,12 +199,6 @@ const styles = StyleSheet.create({
     fontWeight: "700",
   },
 
-  stepLine: {
-    width: 40,
-    height: 2,
-    backgroundColor: "#374151",
-  },
-
   stepLabels: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -203,14 +206,31 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
 
-  label: {
-    color: "#6B7280",
-    fontSize: 12,
-  },
-
   labelActive: {
     color: "#00F5FF",
     fontSize: 12,
+  },
+
+  labelWhite: {
+    color: "#ffffff",
+    fontSize: 12,
+  },
+
+  // ✅ NEW UNDERLINE STYLES
+  underlineContainer: {
+    flexDirection: "row",
+    marginTop: 6,
+    height: 2,
+  },
+
+  underlineCyan: {
+    flex: 1, // 1/3 width — cyan (step 1)
+    backgroundColor: "#00F5FF",
+  },
+
+  underlineWhite: {
+    flex: 2, // 2/3 width — white (step 2 & 3)
+    backgroundColor: "#ffffff",
   },
 
   card: {
@@ -267,30 +287,5 @@ const styles = StyleSheet.create({
     color: "#9CA3AF",
     fontSize: 11,
     width: 220,
-  },
-
-  continueBtn: {
-    marginTop: 24,
-    height: 48,
-    backgroundColor: "#00F5FF",
-    borderRadius: 10,
-    justifyContent: "center",
-    alignItems: "center",
-    shadowColor: "#00F5FF",
-    shadowOpacity: 0.4,
-    shadowRadius: 10,
-    elevation: 6,
-  },
-
-  continueBtnDisabled: {
-    backgroundColor: "#1C3A3B",
-    shadowOpacity: 0,
-    elevation: 0,
-  },
-
-  continueBtnText: {
-    color: "#000",
-    fontSize: 15,
-    fontWeight: "700",
   },
 });
